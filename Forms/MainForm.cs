@@ -86,7 +86,7 @@ namespace PANBTG_GUI
             if (!String.IsNullOrEmpty(inputImagePathTextBox.Text)) {
                 string resultCmd = "PANBTG.exe";
 
-                resultCmd += $" --gui-version \"{FOR_VERSION}\" --input \"{inputImagePathTextBox.Text}\"";
+                resultCmd += $" --input \"{inputImagePathTextBox.Text}\"";
 
                 if (resizingMethodComboBox.SelectedIndex == 1 && isValidScale)
                     resultCmd += $" --scale {resizingMethod2NumericInput.Value.ToString().Replace(",", ".")}";
@@ -435,6 +435,7 @@ namespace PANBTG_GUI
                 startInfo.Arguments = resultCommandTextBox.Text.Remove(0, 10);
                 startInfo.FileName = resultCommandTextBox.Text.Substring(0, 10);
                 startInfo.WindowStyle = ProcessWindowStyle.Normal;
+                startInfo.Environment.Add("PANBTG_GUI_FOR_VERSION", FOR_VERSION);
                 Process process = Process.Start(startInfo);
                 process.WaitForExit();
                 statusTextTextBox.Text = "Conversion is finished!";
