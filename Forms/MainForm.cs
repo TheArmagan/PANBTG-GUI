@@ -77,18 +77,20 @@ namespace PANBTG_GUI
         public void genCmd()
         {
             int[] imgSize = getImageWidthAndHeight(inputImagePathTextBox.Text);
+            bool isValidScale = (float)resizingMethod2NumericInput.Value != 1;
+            bool isValidResize = !((int)resizingMethod1NumericInput.Value == imgSize[0] && (int)resizingMethod2NumericInput.Value == imgSize[1]);
             if (!String.IsNullOrEmpty(inputImagePathTextBox.Text)) {
                 string resultCmd = "PANBTG.exe";
 
                 resultCmd += $" --input \"{inputImagePathTextBox.Text}\"";
 
-                if (resizingMethodComboBox.SelectedIndex == 1 && (int)resizingMethod2NumericInput.Value != 1)
+                if (resizingMethodComboBox.SelectedIndex == 1 && isValidScale)
                     resultCmd += $" --scale {resizingMethod2NumericInput.Value.ToString().Replace(",", ".")}";
 
-                if (resizingMethodComboBox.SelectedIndex == 2 && ((int)resizingMethod1NumericInput.Value != imgSize[0] && (int)resizingMethod2NumericInput.Value != imgSize[1])) 
+                if (resizingMethodComboBox.SelectedIndex == 2 && isValidResize) 
                     resultCmd += $" --resize {resizingMethod1NumericInput.Value}x{resizingMethod2NumericInput.Value}";
 
-                if (resizingMethodComboBox.SelectedIndex != 0 && nearestNeighborCheckBox.Checked)
+                if (resizingMethodComboBox.SelectedIndex != 0 && nearestNeighborCheckBox.Checked && ((resizingMethodComboBox.SelectedIndex == 1 && isValidScale) || (resizingMethodComboBox.SelectedIndex == 2 && isValidResize)))
                     resultCmd += $" --nearest-neighbor";
 
                 if (enableDitheringCheckBox.Checked)
@@ -167,8 +169,12 @@ namespace PANBTG_GUI
                     break;
                 case 2: // By Width & Height
                     resizingMethod1NumericInput.Minimum = 1;
+                    resizingMethod1NumericInput.Maximum = decimal.MaxValue;
                     resizingMethod1NumericInput.Value = new decimal(imgSize[0]);
+                    resizingMethod1NumericInput.Increment = 1;
+                    resizingMethod2NumericInput.Increment = 1;
                     resizingMethod2NumericInput.Minimum = 1;
+                    resizingMethod2NumericInput.Maximum = decimal.MaxValue;
                     resizingMethod2NumericInput.Value = new decimal(imgSize[1]);
                     resizingMethod1NumericInput.DecimalPlaces = 0;
                     resizingMethod2NumericInput.DecimalPlaces = 0;
@@ -192,9 +198,10 @@ namespace PANBTG_GUI
             else
             {
                 int[] imgSize = getImageWidthAndHeight(inputImagePathTextBox.Text);
-                if ((int)resizingMethod2NumericInput.Value == 1)
+                if ((float)resizingMethod2NumericInput.Value == 1)
                 {
                     statusTextTextBox.Text = $"Image scale factor is changes nothing! (Useless)";
+                    blinkTheStatusText();
                 }
                 else
                 {
@@ -214,6 +221,7 @@ namespace PANBTG_GUI
                 if ((int)resizingMethod1NumericInput.Value == imgSize[0] && (int)resizingMethod2NumericInput.Value == imgSize[1])
                 {
                     statusTextTextBox.Text = $"The new image width and height same as original! (Useless)";
+                    blinkTheStatusText();
                 }
                 else
                 {
@@ -415,9 +423,19 @@ namespace PANBTG_GUI
 
         private void runResultCommandButton_Click(object sender, EventArgs e)
         {
-            statusTextTextBox.Text = $"Process started!";
-            // hook test
-            Process.Start(resultCommandTextBox.Text);
+
+            try
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                statusTextTextBox.Text = $"Process started!";
+                startInfo.Arguments = resultCommandTextBox.Text;
+                startInfo.WindowStyle = ProcessWindowStyle.Normal;
+                Process.Start(startInfo);
+            } catch
+            {
+                statusTextTextBox.Text = $"Please put the PANBTG.exe and PANBGT-GUI.exe to same folder!";
+                blinkTheStatusText();
+            }
         }
 
         private void nearestNeighborCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -430,6 +448,22 @@ namespace PANBTG_GUI
                 statusTextTextBox.Text = $"Resizing method changed to Normal!";
             }
             genCmd();
+        }
+
+
+        private void blinkTheStatusText()
+        {
+            statusTextTextBox.BackColor = Color.OrangeRed;
+            statusTextTextBox.ForeColor = Color.Black;
+
+            blinkStatusTextTimer1.Start();
+        }
+
+        private void blinkStatusTextTimer1_Tick(object sender, EventArgs e)
+        {
+            statusTextTextBox.BackColor = Color.FromArgb(255, 64, 64, 64);
+            statusTextTextBox.ForeColor = Color.Gray;
+            blinkStatusTextTimer1.Stop();
         }
     }
 }

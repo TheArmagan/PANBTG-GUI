@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label3 = new System.Windows.Forms.Label();
             this.openFileButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -59,6 +60,7 @@
             this.fileSizeInfoLabel = new System.Windows.Forms.Label();
             this.statusTextTextBox = new System.Windows.Forms.TextBox();
             this.nearestNeighborCheckBox = new System.Windows.Forms.CheckBox();
+            this.blinkStatusTextTimer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.controlPanel.SuspendLayout();
@@ -445,6 +447,11 @@
             this.nearestNeighborCheckBox.UseVisualStyleBackColor = true;
             this.nearestNeighborCheckBox.CheckedChanged += new System.EventHandler(this.nearestNeighborCheckBox_CheckedChanged);
             // 
+            // blinkStatusTextTimer1
+            // 
+            this.blinkStatusTextTimer1.Interval = 50;
+            this.blinkStatusTextTimer1.Tick += new System.EventHandler(this.blinkStatusTextTimer1_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -514,6 +521,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox nearestNeighborCheckBox;
+        private System.Windows.Forms.Timer blinkStatusTextTimer1;
     }
 }
 
