@@ -15,6 +15,8 @@ namespace PANBTG_GUI
 {
     public partial class MainForm : Form
     {
+        static string FOR_VERSION = "1.1.1";
+
         public MainForm()
         {
             InitializeComponent();
@@ -37,6 +39,8 @@ namespace PANBTG_GUI
 
             preprocessingEffectsListBox.Items.Add("[OFF]: Grayscale");
             preprocessingEffectsListBox.Items.Add("[OFF]: Deepfry");
+
+            forVersionLabel.Text = $"for v{FOR_VERSION}";
 
             statusTextTextBox.Text = "Please select an image.";
         }
@@ -82,7 +86,7 @@ namespace PANBTG_GUI
             if (!String.IsNullOrEmpty(inputImagePathTextBox.Text)) {
                 string resultCmd = "PANBTG.exe";
 
-                resultCmd += $" --input \"{inputImagePathTextBox.Text}\"";
+                resultCmd += $" --gui-version \"{FOR_VERSION}\" --input \"{inputImagePathTextBox.Text}\"";
 
                 if (resizingMethodComboBox.SelectedIndex == 1 && isValidScale)
                     resultCmd += $" --scale {resizingMethod2NumericInput.Value.ToString().Replace(",", ".")}";
