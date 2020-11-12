@@ -447,7 +447,7 @@ namespace PANBTG_GUI
             {
                 if (err.Message.Contains("cannot find"))
                 {
-                    statusTextTextBox.Text = "ERROR: Please put the PANBTG.exe and PANBGT-GUI.exe to same folder!";
+                    statusTextTextBox.Text = "ERROR: Please put the PANBTG.exe and PANBGT-GUI.exe in same folder!";
                 } else
                 {
                     statusTextTextBox.Text = $"ERROR: {err.Message}";
