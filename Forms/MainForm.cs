@@ -201,7 +201,7 @@ namespace PANBTG_GUI
                 if ((float)resizingMethod2NumericInput.Value == 1)
                 {
                     statusTextTextBox.Text = $"Image scale factor is changes nothing! (Useless)";
-                    blinkTheStatusText();
+                    blinkTheStatusText(Color.OrangeRed);
                 }
                 else
                 {
@@ -221,7 +221,7 @@ namespace PANBTG_GUI
                 if ((int)resizingMethod1NumericInput.Value == imgSize[0] && (int)resizingMethod2NumericInput.Value == imgSize[1])
                 {
                     statusTextTextBox.Text = $"The new image width and height same as original! (Useless)";
-                    blinkTheStatusText();
+                    blinkTheStatusText(Color.OrangeRed);
                 }
                 else
                 {
@@ -428,13 +428,24 @@ namespace PANBTG_GUI
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 statusTextTextBox.Text = $"Process started!";
-                startInfo.Arguments = resultCommandTextBox.Text;
+                startInfo.Arguments = resultCommandTextBox.Text.Remove(0, 10);
+                startInfo.FileName = resultCommandTextBox.Text.Substring(0, 10);
                 startInfo.WindowStyle = ProcessWindowStyle.Normal;
-                Process.Start(startInfo);
-            } catch
+                Process process = Process.Start(startInfo);
+                process.WaitForExit();
+                statusTextTextBox.Text = "Conversion is finished!";
+                blinkTheStatusText(Color.Lime, 2500);
+            } catch (Exception err)
             {
-                statusTextTextBox.Text = $"Please put the PANBTG.exe and PANBGT-GUI.exe to same folder!";
-                blinkTheStatusText();
+                if (err.Message.Contains("cannot find"))
+                {
+                    statusTextTextBox.Text = "ERROR: Please put the PANBTG.exe and PANBGT-GUI.exe to same folder!";
+                } else
+                {
+                    statusTextTextBox.Text = $"ERROR: {err.Message}";
+                }
+                
+                blinkTheStatusText(Color.OrangeRed);
             }
         }
 
@@ -451,11 +462,12 @@ namespace PANBTG_GUI
         }
 
 
-        private void blinkTheStatusText()
+        private void blinkTheStatusText(Color bgColor, int ms = 50)
         {
-            statusTextTextBox.BackColor = Color.OrangeRed;
+            statusTextTextBox.BackColor = bgColor;
             statusTextTextBox.ForeColor = Color.Black;
 
+            blinkStatusTextTimer1.Interval = ms;
             blinkStatusTextTimer1.Start();
         }
 

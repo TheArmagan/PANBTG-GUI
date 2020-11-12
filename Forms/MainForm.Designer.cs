@@ -61,6 +61,7 @@
             this.statusTextTextBox = new System.Windows.Forms.TextBox();
             this.nearestNeighborCheckBox = new System.Windows.Forms.CheckBox();
             this.blinkStatusTextTimer1 = new System.Windows.Forms.Timer(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.controlPanel.SuspendLayout();
@@ -146,7 +147,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.label1.Location = new System.Drawing.Point(131, 20);
+            this.label1.Location = new System.Drawing.Point(129, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 19);
             this.label1.TabIndex = 8;
@@ -452,11 +453,23 @@
             this.blinkStatusTextTimer1.Interval = 50;
             this.blinkStatusTextTimer1.Tick += new System.EventHandler(this.blinkStatusTextTimer1_Tick);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold);
+            this.label6.ForeColor = System.Drawing.Color.Gray;
+            this.label6.Location = new System.Drawing.Point(130, 24);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 14);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "for v1.2.0";
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(621, 604);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.statusTextTextBox);
             this.Controls.Add(this.runResultCommandButton);
             this.Controls.Add(this.fileSizeInfoLabel);
@@ -522,6 +535,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox nearestNeighborCheckBox;
         private System.Windows.Forms.Timer blinkStatusTextTimer1;
+        private System.Windows.Forms.Label label6;
     }
 }
 

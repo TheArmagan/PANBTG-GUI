@@ -1,0 +1,10 @@
+C:\Users\BDT\source\repos\PANBTG-GUI\bin\Release\PANBTG-GUI.exe.config
+C:\Users\BDT\source\repos\PANBTG-GUI\bin\Release\PANBTG-GUI.exe
+C:\Users\BDT\source\repos\PANBTG-GUI\bin\Release\PANBTG-GUI.pdb
+C:\Users\BDT\source\repos\PANBTG-GUI\obj\Release\PANBTG-GUI.csprojAssemblyReference.cache
+C:\Users\BDT\source\repos\PANBTG-GUI\obj\Release\PANBTG_GUI.MainForm.resources
+C:\Users\BDT\source\repos\PANBTG-GUI\obj\Release\PANBTG_GUI.Properties.Resources.resources
+C:\Users\BDT\source\repos\PANBTG-GUI\obj\Release\PANBTG-GUI.csproj.GenerateResource.cache
+C:\Users\BDT\source\repos\PANBTG-GUI\obj\Release\PANBTG-GUI.csproj.CoreCompileInputs.cache
+C:\Users\BDT\source\repos\PANBTG-GUI\obj\Release\PANBTG-GUI.exe
+C:\Users\BDT\source\repos\PANBTG-GUI\obj\Release\PANBTG-GUI.pdb
