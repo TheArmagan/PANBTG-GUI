@@ -15,7 +15,7 @@ namespace PANBTG_GUI
 {
     public partial class MainForm : Form
     {
-        static string FOR_VERSION = "1.1.1"; //
+        static string FOR_VERSION = "1.2.0";
 
         public MainForm()
         {
@@ -87,6 +87,9 @@ namespace PANBTG_GUI
                 string resultCmd = "PANBTG.exe";
 
                 resultCmd += $" --input \"{inputImagePathTextBox.Text}\"";
+
+                //Console.WriteLine("SCALE " + resizingMethod2NumericInput.Value + " " + isValidScale);
+                //Console.WriteLine("RESIZE " + resizingMethod1NumericInput.Value + " " + resizingMethod2NumericInput.Value  + " "+ isValidResize);
 
                 if (resizingMethodComboBox.SelectedIndex == 1 && isValidScale)
                     resultCmd += $" --scale {resizingMethod2NumericInput.Value.ToString().Replace(",", ".")}";
@@ -201,7 +204,6 @@ namespace PANBTG_GUI
             }
             else
             {
-                int[] imgSize = getImageWidthAndHeight(inputImagePathTextBox.Text);
                 if ((float)resizingMethod2NumericInput.Value == 1)
                 {
                     statusTextTextBox.Text = $"Image scale factor is changes nothing! (Useless)";
@@ -222,6 +224,7 @@ namespace PANBTG_GUI
             } else
             {
                 int[] imgSize = getImageWidthAndHeight(inputImagePathTextBox.Text);
+
                 if ((int)resizingMethod1NumericInput.Value == imgSize[0] && (int)resizingMethod2NumericInput.Value == imgSize[1])
                 {
                     statusTextTextBox.Text = $"The new image width and height same as original! (Useless)";
@@ -229,7 +232,7 @@ namespace PANBTG_GUI
                 }
                 else
                 {
-                    statusTextTextBox.Text = $"The new image width and height is {imgSize[0]}x{imgSize[1]}!";
+                    statusTextTextBox.Text = $"The new image width and height is {resizingMethod1NumericInput.Value}x{resizingMethod2NumericInput.Value}!";
                 }
             }
 

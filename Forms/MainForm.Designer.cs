@@ -37,6 +37,7 @@
             this.resultCommandTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
+            this.nearestNeighborCheckBox = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.preprocessingEffectsListBoxPanel = new System.Windows.Forms.Panel();
@@ -59,7 +60,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.fileSizeInfoLabel = new System.Windows.Forms.Label();
             this.statusTextTextBox = new System.Windows.Forms.TextBox();
-            this.nearestNeighborCheckBox = new System.Windows.Forms.CheckBox();
             this.blinkStatusTextTimer1 = new System.Windows.Forms.Timer(this.components);
             this.forVersionLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -173,6 +173,18 @@
             this.controlPanel.Name = "controlPanel";
             this.controlPanel.Size = new System.Drawing.Size(597, 433);
             this.controlPanel.TabIndex = 9;
+            // 
+            // nearestNeighborCheckBox
+            // 
+            this.nearestNeighborCheckBox.AutoSize = true;
+            this.nearestNeighborCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.nearestNeighborCheckBox.Location = new System.Drawing.Point(246, 8);
+            this.nearestNeighborCheckBox.Name = "nearestNeighborCheckBox";
+            this.nearestNeighborCheckBox.Size = new System.Drawing.Size(138, 18);
+            this.nearestNeighborCheckBox.TabIndex = 16;
+            this.nearestNeighborCheckBox.Text = "Nearest Neighbor";
+            this.nearestNeighborCheckBox.UseVisualStyleBackColor = true;
+            this.nearestNeighborCheckBox.CheckedChanged += new System.EventHandler(this.nearestNeighborCheckBox_CheckedChanged);
             // 
             // label5
             // 
@@ -436,18 +448,6 @@
             this.statusTextTextBox.Size = new System.Drawing.Size(597, 18);
             this.statusTextTextBox.TabIndex = 8;
             // 
-            // nearestNeighborCheckBox
-            // 
-            this.nearestNeighborCheckBox.AutoSize = true;
-            this.nearestNeighborCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.nearestNeighborCheckBox.Location = new System.Drawing.Point(246, 8);
-            this.nearestNeighborCheckBox.Name = "nearestNeighborCheckBox";
-            this.nearestNeighborCheckBox.Size = new System.Drawing.Size(138, 18);
-            this.nearestNeighborCheckBox.TabIndex = 16;
-            this.nearestNeighborCheckBox.Text = "Nearest Neighbor";
-            this.nearestNeighborCheckBox.UseVisualStyleBackColor = true;
-            this.nearestNeighborCheckBox.CheckedChanged += new System.EventHandler(this.nearestNeighborCheckBox_CheckedChanged);
-            // 
             // blinkStatusTextTimer1
             // 
             this.blinkStatusTextTimer1.Interval = 50;
@@ -462,7 +462,7 @@
             this.forVersionLabel.Name = "forVersionLabel";
             this.forVersionLabel.Size = new System.Drawing.Size(77, 14);
             this.forVersionLabel.TabIndex = 13;
-            this.forVersionLabel.Text = "for v1.2.0";
+            this.forVersionLabel.Text = "for v0.0.0";
             // 
             // MainForm
             // 
