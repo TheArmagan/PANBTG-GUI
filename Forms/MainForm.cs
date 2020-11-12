@@ -29,9 +29,9 @@ namespace PANBTG_GUI
             ditheringValueNumericInput.Minimum = new decimal(1);
             ditheringValueNumericInput.Value = new decimal(1);
             customScaffoldBlockInputPanel.Visible = false;
-            scaleFactorResultLabel.Visible = false;
             resultCommandTextBox.Enabled = false;
             runResultCommandButton.Enabled = false;
+            nearestNeighborCheckBox.Visible = false;
 
             openFileButton.ForeColor = Color.Lime;
 
@@ -39,8 +39,6 @@ namespace PANBTG_GUI
             preprocessingEffectsListBox.Items.Add("[OFF]: Deepfry");
 
             statusTextTextBox.Text = "Please select an image.";
-
-            genCmd();
         }
 
         private void openFileButton_Click(object sender, EventArgs e)
@@ -78,16 +76,20 @@ namespace PANBTG_GUI
 
         public void genCmd()
         {
+            int[] imgSize = getImageWidthAndHeight(inputImagePathTextBox.Text);
             if (!String.IsNullOrEmpty(inputImagePathTextBox.Text)) {
                 string resultCmd = "PANBTG.exe";
 
                 resultCmd += $" --input \"{inputImagePathTextBox.Text}\"";
 
-                if (resizingMethodComboBox.SelectedIndex == 1)
+                if (resizingMethodComboBox.SelectedIndex == 1 && (int)resizingMethod2NumericInput.Value != 1)
                     resultCmd += $" --scale {resizingMethod2NumericInput.Value.ToString().Replace(",", ".")}";
 
-                if (resizingMethodComboBox.SelectedIndex == 2) 
+                if (resizingMethodComboBox.SelectedIndex == 2 && ((int)resizingMethod1NumericInput.Value != imgSize[0] && (int)resizingMethod2NumericInput.Value != imgSize[1])) 
                     resultCmd += $" --resize {resizingMethod1NumericInput.Value}x{resizingMethod2NumericInput.Value}";
+
+                if (resizingMethodComboBox.SelectedIndex != 0 && nearestNeighborCheckBox.Checked)
+                    resultCmd += $" --nearest-neighbor";
 
                 if (enableDitheringCheckBox.Checked)
                     resultCmd += $" --dither {ditheringValueNumericInput.Value}";
@@ -150,7 +152,7 @@ namespace PANBTG_GUI
                     resizingMethod1NumericInput.Visible = false;
                     resizingMethod2NumericInput.Visible = false;
                     resizingMethodXLabel.Visible = false;
-                    scaleFactorResultLabel.Visible = false;
+                    nearestNeighborCheckBox.Visible = false;
                     break;
                 case 1: // By Factor.
                     resizingMethod2NumericInput.DecimalPlaces = 2;
@@ -160,13 +162,10 @@ namespace PANBTG_GUI
                     resizingMethod2NumericInput.Visible = true;
                     resizingMethod1NumericInput.Visible = false;
                     resizingMethodXLabel.Visible = false;
-                    scaleFactorResultLabel.Visible = true;
-
-                    int[] fwh = calcAfterFactorWidthAndHeight((double)resizingMethod2NumericInput.Value);
-                    scaleFactorResultLabel.Text = $"{fwh[0]}x{fwh[1]}";
-
+                    nearestNeighborCheckBox.Visible = true;
+                    updateScaleMessage();
                     break;
-                case 2: // By Width And Height
+                case 2: // By Width & Height
                     resizingMethod1NumericInput.Minimum = 1;
                     resizingMethod1NumericInput.Value = new decimal(imgSize[0]);
                     resizingMethod2NumericInput.Minimum = 1;
@@ -176,16 +175,52 @@ namespace PANBTG_GUI
                     resizingMethod1NumericInput.Visible = true;
                     resizingMethod2NumericInput.Visible = true;
                     resizingMethodXLabel.Visible = true;
-                    scaleFactorResultLabel.Visible = false;
+                    nearestNeighborCheckBox.Visible = true;
+                    updateResizeMessage();
                     break;
                 default:
                     break;
             }
         }
 
-        private void resizingMethod1NumericInput_ValueChanged(object sender, EventArgs e)
+        private void updateScaleMessage()
         {
-            genCmd();
+            if (resizingMethodComboBox.SelectedIndex == 0)
+            {
+                statusTextTextBox.Text = $"Resizing is disabled!";
+            }
+            else
+            {
+                int[] imgSize = getImageWidthAndHeight(inputImagePathTextBox.Text);
+                if ((int)resizingMethod2NumericInput.Value == 1)
+                {
+                    statusTextTextBox.Text = $"Image scale factor is changes nothing! (Useless)";
+                }
+                else
+                {
+                    int[] fwh = calcAfterFactorWidthAndHeight((double)resizingMethod2NumericInput.Value);
+                    statusTextTextBox.Text = $"Image scale factor result is {fwh[0]}x{fwh[1]}!";
+                }
+            }
+        }
+
+        private void updateResizeMessage()
+        {
+            if (resizingMethodComboBox.SelectedIndex == 0) {
+                statusTextTextBox.Text = $"Resizing is disabled!";
+            } else
+            {
+                int[] imgSize = getImageWidthAndHeight(inputImagePathTextBox.Text);
+                if ((int)resizingMethod1NumericInput.Value == imgSize[0] && (int)resizingMethod2NumericInput.Value == imgSize[1])
+                {
+                    statusTextTextBox.Text = $"The new image width and height same as original! (Useless)";
+                }
+                else
+                {
+                    statusTextTextBox.Text = $"The new image width and height is {imgSize[0]}x{imgSize[1]}!";
+                }
+            }
+
         }
 
         private int[] calcAfterFactorWidthAndHeight(double factor)
@@ -194,13 +229,25 @@ namespace PANBTG_GUI
             return new int[] { (int)Math.Round((double)(imgSize[0] * resizingMethod2NumericInput.Value)), (int)Math.Round((double)(imgSize[1] * resizingMethod2NumericInput.Value)) };
         }
 
+        private void resizingMethod1NumericInput_ValueChanged(object sender, EventArgs e)
+        {
+            updateResizeMessage();
+            genCmd();
+        }
+
         private void resizingMethod2NumericInput_ValueChanged(object sender, EventArgs e)
         {
-            
-            if (resizingMethodComboBox.SelectedIndex == 1)
+
+            switch (resizingMethodComboBox.SelectedIndex)
             {
-                int[] fwh = calcAfterFactorWidthAndHeight((double)resizingMethod2NumericInput.Value);
-                scaleFactorResultLabel.Text = $"{fwh[0]}x{fwh[1]}";
+                case 1:
+                    updateScaleMessage();
+                    break;
+                case 2:
+                    updateResizeMessage();
+                    break;
+                default:
+                    break;
             }
 
             genCmd();
@@ -210,15 +257,19 @@ namespace PANBTG_GUI
         {
             int width = 1;
             int height = 1;
-            using (Stream stream = File.OpenRead(path))
+
+            if (!String.IsNullOrEmpty(path))
             {
-                using (Image sourceImage = Image.FromStream(stream, false, false))
+                using (Stream stream = File.OpenRead(path))
                 {
-                    width = sourceImage.Width;
-                    height = sourceImage.Height;
+                    using (Image sourceImage = Image.FromStream(stream, false, false))
+                    {
+                        width = sourceImage.Width;
+                        height = sourceImage.Height;
+                    }
                 }
+                GC.Collect();
             }
-            GC.Collect();
 
             return new int[] { width, height };
         }
@@ -243,6 +294,7 @@ namespace PANBTG_GUI
 
         private void ditheringValueNumericInput_ValueChanged(object sender, EventArgs e)
         {
+            statusTextTextBox.Text = $"Dithering factor is set to {ditheringValueNumericInput.Value}!";
             genCmd();
         }
 
@@ -364,7 +416,20 @@ namespace PANBTG_GUI
         private void runResultCommandButton_Click(object sender, EventArgs e)
         {
             statusTextTextBox.Text = $"Process started!";
+            // hook test
             Process.Start(resultCommandTextBox.Text);
+        }
+
+        private void nearestNeighborCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (nearestNeighborCheckBox.Checked)
+            {
+                statusTextTextBox.Text = $"Resizing method changed to Nearest Neighbor!";
+            } else
+            {
+                statusTextTextBox.Text = $"Resizing method changed to Normal!";
+            }
+            genCmd();
         }
     }
 }

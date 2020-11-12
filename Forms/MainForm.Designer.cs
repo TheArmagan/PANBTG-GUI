@@ -36,8 +36,8 @@
             this.resultCommandTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.scaleFactorResultLabel = new System.Windows.Forms.Label();
             this.preprocessingEffectsListBoxPanel = new System.Windows.Forms.Panel();
             this.preprocessingEffectsMoveDownItemButton = new System.Windows.Forms.Button();
             this.preprocessingEffectsMoveUpItemButton = new System.Windows.Forms.Button();
@@ -58,7 +58,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.fileSizeInfoLabel = new System.Windows.Forms.Label();
             this.statusTextTextBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.nearestNeighborCheckBox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.controlPanel.SuspendLayout();
@@ -152,9 +152,9 @@
             // 
             // controlPanel
             // 
+            this.controlPanel.Controls.Add(this.nearestNeighborCheckBox);
             this.controlPanel.Controls.Add(this.label5);
             this.controlPanel.Controls.Add(this.label4);
-            this.controlPanel.Controls.Add(this.scaleFactorResultLabel);
             this.controlPanel.Controls.Add(this.preprocessingEffectsListBoxPanel);
             this.controlPanel.Controls.Add(this.customScaffoldBlockInputPanel);
             this.controlPanel.Controls.Add(this.enableCustomScaffoldBlockCheckBox);
@@ -171,6 +171,16 @@
             this.controlPanel.Size = new System.Drawing.Size(597, 433);
             this.controlPanel.TabIndex = 9;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Consolas", 11.45F);
+            this.label5.Location = new System.Drawing.Point(-4, 6);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(99, 19);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Resize By:";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -181,26 +191,15 @@
             this.label4.TabIndex = 14;
             this.label4.Text = "Preprocessing Effects:";
             // 
-            // scaleFactorResultLabel
-            // 
-            this.scaleFactorResultLabel.Font = new System.Drawing.Font("Consolas", 11.25F);
-            this.scaleFactorResultLabel.ForeColor = System.Drawing.Color.Gray;
-            this.scaleFactorResultLabel.Location = new System.Drawing.Point(314, 4);
-            this.scaleFactorResultLabel.Name = "scaleFactorResultLabel";
-            this.scaleFactorResultLabel.Size = new System.Drawing.Size(151, 23);
-            this.scaleFactorResultLabel.TabIndex = 13;
-            this.scaleFactorResultLabel.Text = "0x0";
-            this.scaleFactorResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // preprocessingEffectsListBoxPanel
             // 
             this.preprocessingEffectsListBoxPanel.Controls.Add(this.preprocessingEffectsMoveDownItemButton);
             this.preprocessingEffectsListBoxPanel.Controls.Add(this.preprocessingEffectsMoveUpItemButton);
             this.preprocessingEffectsListBoxPanel.Controls.Add(this.preprocessingEffectsToggleItemButton);
             this.preprocessingEffectsListBoxPanel.Controls.Add(this.preprocessingEffectsListBox);
-            this.preprocessingEffectsListBoxPanel.Location = new System.Drawing.Point(314, 153);
+            this.preprocessingEffectsListBoxPanel.Location = new System.Drawing.Point(351, 153);
             this.preprocessingEffectsListBoxPanel.Name = "preprocessingEffectsListBoxPanel";
-            this.preprocessingEffectsListBoxPanel.Size = new System.Drawing.Size(282, 92);
+            this.preprocessingEffectsListBoxPanel.Size = new System.Drawing.Size(247, 92);
             this.preprocessingEffectsListBoxPanel.TabIndex = 12;
             // 
             // preprocessingEffectsMoveDownItemButton
@@ -210,7 +209,7 @@
             this.preprocessingEffectsMoveDownItemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.preprocessingEffectsMoveDownItemButton.Font = new System.Drawing.Font("Consolas", 11.25F);
             this.preprocessingEffectsMoveDownItemButton.ForeColor = System.Drawing.Color.White;
-            this.preprocessingEffectsMoveDownItemButton.Location = new System.Drawing.Point(193, 60);
+            this.preprocessingEffectsMoveDownItemButton.Location = new System.Drawing.Point(154, 60);
             this.preprocessingEffectsMoveDownItemButton.Name = "preprocessingEffectsMoveDownItemButton";
             this.preprocessingEffectsMoveDownItemButton.Size = new System.Drawing.Size(90, 32);
             this.preprocessingEffectsMoveDownItemButton.TabIndex = 14;
@@ -225,7 +224,7 @@
             this.preprocessingEffectsMoveUpItemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.preprocessingEffectsMoveUpItemButton.Font = new System.Drawing.Font("Consolas", 11.25F);
             this.preprocessingEffectsMoveUpItemButton.ForeColor = System.Drawing.Color.White;
-            this.preprocessingEffectsMoveUpItemButton.Location = new System.Drawing.Point(112, 60);
+            this.preprocessingEffectsMoveUpItemButton.Location = new System.Drawing.Point(73, 60);
             this.preprocessingEffectsMoveUpItemButton.Name = "preprocessingEffectsMoveUpItemButton";
             this.preprocessingEffectsMoveUpItemButton.Size = new System.Drawing.Size(75, 32);
             this.preprocessingEffectsMoveUpItemButton.TabIndex = 13;
@@ -254,17 +253,17 @@
             this.preprocessingEffectsListBox.FormattingEnabled = true;
             this.preprocessingEffectsListBox.Location = new System.Drawing.Point(0, 0);
             this.preprocessingEffectsListBox.Name = "preprocessingEffectsListBox";
-            this.preprocessingEffectsListBox.Size = new System.Drawing.Size(283, 56);
+            this.preprocessingEffectsListBox.Size = new System.Drawing.Size(244, 56);
             this.preprocessingEffectsListBox.TabIndex = 11;
             // 
             // customScaffoldBlockInputPanel
             // 
             this.customScaffoldBlockInputPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.customScaffoldBlockInputPanel.Controls.Add(this.customScaffoldBlockTextBox);
-            this.customScaffoldBlockInputPanel.Location = new System.Drawing.Point(314, 91);
+            this.customScaffoldBlockInputPanel.Location = new System.Drawing.Point(351, 91);
             this.customScaffoldBlockInputPanel.Name = "customScaffoldBlockInputPanel";
             this.customScaffoldBlockInputPanel.Padding = new System.Windows.Forms.Padding(4);
-            this.customScaffoldBlockInputPanel.Size = new System.Drawing.Size(283, 32);
+            this.customScaffoldBlockInputPanel.Size = new System.Drawing.Size(246, 32);
             this.customScaffoldBlockInputPanel.TabIndex = 8;
             // 
             // customScaffoldBlockTextBox
@@ -275,7 +274,7 @@
             this.customScaffoldBlockTextBox.ForeColor = System.Drawing.Color.White;
             this.customScaffoldBlockTextBox.Location = new System.Drawing.Point(7, 7);
             this.customScaffoldBlockTextBox.Name = "customScaffoldBlockTextBox";
-            this.customScaffoldBlockTextBox.Size = new System.Drawing.Size(269, 18);
+            this.customScaffoldBlockTextBox.Size = new System.Drawing.Size(232, 18);
             this.customScaffoldBlockTextBox.TabIndex = 7;
             this.customScaffoldBlockTextBox.TextChanged += new System.EventHandler(this.customScaffoldBlockTextBox_TextChanged);
             // 
@@ -320,9 +319,9 @@
             this.ditheringValueNumericInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.ditheringValueNumericInput.Font = new System.Drawing.Font("Consolas", 11.25F);
             this.ditheringValueNumericInput.ForeColor = System.Drawing.Color.White;
-            this.ditheringValueNumericInput.Location = new System.Drawing.Point(469, 33);
+            this.ditheringValueNumericInput.Location = new System.Drawing.Point(507, 33);
             this.ditheringValueNumericInput.Name = "ditheringValueNumericInput";
-            this.ditheringValueNumericInput.Size = new System.Drawing.Size(127, 25);
+            this.ditheringValueNumericInput.Size = new System.Drawing.Size(89, 25);
             this.ditheringValueNumericInput.TabIndex = 6;
             this.ditheringValueNumericInput.ValueChanged += new System.EventHandler(this.ditheringValueNumericInput_ValueChanged);
             // 
@@ -341,7 +340,7 @@
             // resizingMethodXLabel
             // 
             this.resizingMethodXLabel.Font = new System.Drawing.Font("Consolas", 11.25F);
-            this.resizingMethodXLabel.Location = new System.Drawing.Point(447, 7);
+            this.resizingMethodXLabel.Location = new System.Drawing.Point(485, 6);
             this.resizingMethodXLabel.Name = "resizingMethodXLabel";
             this.resizingMethodXLabel.Size = new System.Drawing.Size(16, 18);
             this.resizingMethodXLabel.TabIndex = 4;
@@ -352,9 +351,9 @@
             this.resizingMethod2NumericInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.resizingMethod2NumericInput.Font = new System.Drawing.Font("Consolas", 11.25F);
             this.resizingMethod2NumericInput.ForeColor = System.Drawing.Color.White;
-            this.resizingMethod2NumericInput.Location = new System.Drawing.Point(469, 4);
+            this.resizingMethod2NumericInput.Location = new System.Drawing.Point(507, 4);
             this.resizingMethod2NumericInput.Name = "resizingMethod2NumericInput";
-            this.resizingMethod2NumericInput.Size = new System.Drawing.Size(127, 25);
+            this.resizingMethod2NumericInput.Size = new System.Drawing.Size(89, 25);
             this.resizingMethod2NumericInput.TabIndex = 3;
             this.resizingMethod2NumericInput.ValueChanged += new System.EventHandler(this.resizingMethod2NumericInput_ValueChanged);
             // 
@@ -363,9 +362,9 @@
             this.resizingMethod1NumericInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.resizingMethod1NumericInput.Font = new System.Drawing.Font("Consolas", 11.25F);
             this.resizingMethod1NumericInput.ForeColor = System.Drawing.Color.White;
-            this.resizingMethod1NumericInput.Location = new System.Drawing.Point(314, 4);
+            this.resizingMethod1NumericInput.Location = new System.Drawing.Point(390, 4);
             this.resizingMethod1NumericInput.Name = "resizingMethod1NumericInput";
-            this.resizingMethod1NumericInput.Size = new System.Drawing.Size(127, 25);
+            this.resizingMethod1NumericInput.Size = new System.Drawing.Size(89, 25);
             this.resizingMethod1NumericInput.TabIndex = 2;
             this.resizingMethod1NumericInput.ValueChanged += new System.EventHandler(this.resizingMethod1NumericInput_ValueChanged);
             // 
@@ -434,15 +433,17 @@
             this.statusTextTextBox.Size = new System.Drawing.Size(597, 18);
             this.statusTextTextBox.TabIndex = 8;
             // 
-            // label5
+            // nearestNeighborCheckBox
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Consolas", 11.45F);
-            this.label5.Location = new System.Drawing.Point(-4, 6);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(99, 19);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Resize By:";
+            this.nearestNeighborCheckBox.AutoSize = true;
+            this.nearestNeighborCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.nearestNeighborCheckBox.Location = new System.Drawing.Point(246, 8);
+            this.nearestNeighborCheckBox.Name = "nearestNeighborCheckBox";
+            this.nearestNeighborCheckBox.Size = new System.Drawing.Size(138, 18);
+            this.nearestNeighborCheckBox.TabIndex = 16;
+            this.nearestNeighborCheckBox.Text = "Nearest Neighbor";
+            this.nearestNeighborCheckBox.UseVisualStyleBackColor = true;
+            this.nearestNeighborCheckBox.CheckedChanged += new System.EventHandler(this.nearestNeighborCheckBox_CheckedChanged);
             // 
             // MainForm
             // 
@@ -509,10 +510,10 @@
         private System.Windows.Forms.Button preprocessingEffectsMoveUpItemButton;
         private System.Windows.Forms.Button preprocessingEffectsToggleItemButton;
         private System.Windows.Forms.Label fileSizeInfoLabel;
-        private System.Windows.Forms.Label scaleFactorResultLabel;
         private System.Windows.Forms.TextBox statusTextTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox nearestNeighborCheckBox;
     }
 }
 
