@@ -15,7 +15,7 @@ namespace PANBTG_GUI
 {
     public partial class MainForm : Form
     {
-        static string FOR_VERSION = "1.1.1";
+        static string FOR_VERSION = "1.1.1"; //
 
         public MainForm()
         {
