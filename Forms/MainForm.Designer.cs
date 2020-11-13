@@ -62,6 +62,7 @@
             this.statusTextTextBox = new System.Windows.Forms.TextBox();
             this.blinkStatusTextTimer1 = new System.Windows.Forms.Timer(this.components);
             this.forVersionLabel = new System.Windows.Forms.Label();
+            this.preprocessingEffectsSetValueItemButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.controlPanel.SuspendLayout();
@@ -208,13 +209,14 @@
             // 
             // preprocessingEffectsListBoxPanel
             // 
+            this.preprocessingEffectsListBoxPanel.Controls.Add(this.preprocessingEffectsSetValueItemButton);
             this.preprocessingEffectsListBoxPanel.Controls.Add(this.preprocessingEffectsMoveDownItemButton);
             this.preprocessingEffectsListBoxPanel.Controls.Add(this.preprocessingEffectsMoveUpItemButton);
             this.preprocessingEffectsListBoxPanel.Controls.Add(this.preprocessingEffectsToggleItemButton);
             this.preprocessingEffectsListBoxPanel.Controls.Add(this.preprocessingEffectsListBox);
-            this.preprocessingEffectsListBoxPanel.Location = new System.Drawing.Point(351, 153);
+            this.preprocessingEffectsListBoxPanel.Location = new System.Drawing.Point(246, 153);
             this.preprocessingEffectsListBoxPanel.Name = "preprocessingEffectsListBoxPanel";
-            this.preprocessingEffectsListBoxPanel.Size = new System.Drawing.Size(247, 92);
+            this.preprocessingEffectsListBoxPanel.Size = new System.Drawing.Size(352, 92);
             this.preprocessingEffectsListBoxPanel.TabIndex = 12;
             // 
             // preprocessingEffectsMoveDownItemButton
@@ -224,9 +226,9 @@
             this.preprocessingEffectsMoveDownItemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.preprocessingEffectsMoveDownItemButton.Font = new System.Drawing.Font("Consolas", 11.25F);
             this.preprocessingEffectsMoveDownItemButton.ForeColor = System.Drawing.Color.White;
-            this.preprocessingEffectsMoveDownItemButton.Location = new System.Drawing.Point(154, 60);
+            this.preprocessingEffectsMoveDownItemButton.Location = new System.Drawing.Point(261, 57);
             this.preprocessingEffectsMoveDownItemButton.Name = "preprocessingEffectsMoveDownItemButton";
-            this.preprocessingEffectsMoveDownItemButton.Size = new System.Drawing.Size(90, 32);
+            this.preprocessingEffectsMoveDownItemButton.Size = new System.Drawing.Size(90, 35);
             this.preprocessingEffectsMoveDownItemButton.TabIndex = 14;
             this.preprocessingEffectsMoveDownItemButton.Text = "MOVE DOWN";
             this.preprocessingEffectsMoveDownItemButton.UseVisualStyleBackColor = false;
@@ -239,9 +241,9 @@
             this.preprocessingEffectsMoveUpItemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.preprocessingEffectsMoveUpItemButton.Font = new System.Drawing.Font("Consolas", 11.25F);
             this.preprocessingEffectsMoveUpItemButton.ForeColor = System.Drawing.Color.White;
-            this.preprocessingEffectsMoveUpItemButton.Location = new System.Drawing.Point(73, 60);
+            this.preprocessingEffectsMoveUpItemButton.Location = new System.Drawing.Point(180, 57);
             this.preprocessingEffectsMoveUpItemButton.Name = "preprocessingEffectsMoveUpItemButton";
-            this.preprocessingEffectsMoveUpItemButton.Size = new System.Drawing.Size(75, 32);
+            this.preprocessingEffectsMoveUpItemButton.Size = new System.Drawing.Size(75, 35);
             this.preprocessingEffectsMoveUpItemButton.TabIndex = 13;
             this.preprocessingEffectsMoveUpItemButton.Text = "MOVE UP";
             this.preprocessingEffectsMoveUpItemButton.UseVisualStyleBackColor = false;
@@ -254,9 +256,9 @@
             this.preprocessingEffectsToggleItemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.preprocessingEffectsToggleItemButton.Font = new System.Drawing.Font("Consolas", 11.25F);
             this.preprocessingEffectsToggleItemButton.ForeColor = System.Drawing.Color.White;
-            this.preprocessingEffectsToggleItemButton.Location = new System.Drawing.Point(0, 60);
+            this.preprocessingEffectsToggleItemButton.Location = new System.Drawing.Point(0, 57);
             this.preprocessingEffectsToggleItemButton.Name = "preprocessingEffectsToggleItemButton";
-            this.preprocessingEffectsToggleItemButton.Size = new System.Drawing.Size(67, 32);
+            this.preprocessingEffectsToggleItemButton.Size = new System.Drawing.Size(67, 35);
             this.preprocessingEffectsToggleItemButton.TabIndex = 12;
             this.preprocessingEffectsToggleItemButton.Text = "TOGGLE";
             this.preprocessingEffectsToggleItemButton.UseVisualStyleBackColor = false;
@@ -268,17 +270,18 @@
             this.preprocessingEffectsListBox.FormattingEnabled = true;
             this.preprocessingEffectsListBox.Location = new System.Drawing.Point(0, 0);
             this.preprocessingEffectsListBox.Name = "preprocessingEffectsListBox";
-            this.preprocessingEffectsListBox.Size = new System.Drawing.Size(244, 56);
+            this.preprocessingEffectsListBox.Size = new System.Drawing.Size(351, 56);
             this.preprocessingEffectsListBox.TabIndex = 11;
+            this.preprocessingEffectsListBox.SelectedIndexChanged += new System.EventHandler(this.preprocessingEffectsListBox_SelectedIndexChanged);
             // 
             // customScaffoldBlockInputPanel
             // 
             this.customScaffoldBlockInputPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.customScaffoldBlockInputPanel.Controls.Add(this.customScaffoldBlockTextBox);
-            this.customScaffoldBlockInputPanel.Location = new System.Drawing.Point(351, 91);
+            this.customScaffoldBlockInputPanel.Location = new System.Drawing.Point(246, 91);
             this.customScaffoldBlockInputPanel.Name = "customScaffoldBlockInputPanel";
             this.customScaffoldBlockInputPanel.Padding = new System.Windows.Forms.Padding(4);
-            this.customScaffoldBlockInputPanel.Size = new System.Drawing.Size(246, 32);
+            this.customScaffoldBlockInputPanel.Size = new System.Drawing.Size(351, 32);
             this.customScaffoldBlockInputPanel.TabIndex = 8;
             // 
             // customScaffoldBlockTextBox
@@ -289,7 +292,7 @@
             this.customScaffoldBlockTextBox.ForeColor = System.Drawing.Color.White;
             this.customScaffoldBlockTextBox.Location = new System.Drawing.Point(7, 7);
             this.customScaffoldBlockTextBox.Name = "customScaffoldBlockTextBox";
-            this.customScaffoldBlockTextBox.Size = new System.Drawing.Size(232, 18);
+            this.customScaffoldBlockTextBox.Size = new System.Drawing.Size(336, 18);
             this.customScaffoldBlockTextBox.TabIndex = 7;
             this.customScaffoldBlockTextBox.TextChanged += new System.EventHandler(this.customScaffoldBlockTextBox_TextChanged);
             // 
@@ -464,6 +467,21 @@
             this.forVersionLabel.TabIndex = 13;
             this.forVersionLabel.Text = "for v0.0.0";
             // 
+            // preprocessingEffectsSetValueItemButton
+            // 
+            this.preprocessingEffectsSetValueItemButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.preprocessingEffectsSetValueItemButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(99)))), ((int)(((byte)(99)))));
+            this.preprocessingEffectsSetValueItemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.preprocessingEffectsSetValueItemButton.Font = new System.Drawing.Font("Consolas", 11.25F);
+            this.preprocessingEffectsSetValueItemButton.ForeColor = System.Drawing.Color.White;
+            this.preprocessingEffectsSetValueItemButton.Location = new System.Drawing.Point(73, 57);
+            this.preprocessingEffectsSetValueItemButton.Name = "preprocessingEffectsSetValueItemButton";
+            this.preprocessingEffectsSetValueItemButton.Size = new System.Drawing.Size(101, 35);
+            this.preprocessingEffectsSetValueItemButton.TabIndex = 15;
+            this.preprocessingEffectsSetValueItemButton.Text = "Set Value";
+            this.preprocessingEffectsSetValueItemButton.UseVisualStyleBackColor = false;
+            this.preprocessingEffectsSetValueItemButton.Click += new System.EventHandler(this.preprocessingEffectsSetValueItemButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -536,6 +554,7 @@
         private System.Windows.Forms.CheckBox nearestNeighborCheckBox;
         private System.Windows.Forms.Timer blinkStatusTextTimer1;
         private System.Windows.Forms.Label forVersionLabel;
+        private System.Windows.Forms.Button preprocessingEffectsSetValueItemButton;
     }
 }
 

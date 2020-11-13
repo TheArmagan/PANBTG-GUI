@@ -8,3 +8,4 @@ C:\Users\BDT\source\repos\PANBTG-GUI\obj\Release\PANBTG-GUI.csproj.GenerateResou
 C:\Users\BDT\source\repos\PANBTG-GUI\obj\Release\PANBTG-GUI.csproj.CoreCompileInputs.cache
 C:\Users\BDT\source\repos\PANBTG-GUI\obj\Release\PANBTG-GUI.exe
 C:\Users\BDT\source\repos\PANBTG-GUI\obj\Release\PANBTG-GUI.pdb
+C:\Users\BDT\source\repos\PANBTG-GUI\obj\Release\PANBTG_GUI.Forms.NumericPopupForm.resources

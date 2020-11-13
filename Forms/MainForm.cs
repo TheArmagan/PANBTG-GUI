@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using PANBTG_GUI.Forms;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media.Imaging;
 
 namespace PANBTG_GUI
 {
     public partial class MainForm : Form
     {
-        static string FOR_VERSION = "1.2.0";
+        static string FOR_VERSION = "1.2.1";
 
         public MainForm()
         {
@@ -34,11 +28,15 @@ namespace PANBTG_GUI
             resultCommandTextBox.Enabled = false;
             runResultCommandButton.Enabled = false;
             nearestNeighborCheckBox.Visible = false;
+            preprocessingEffectsSetValueItemButton.Visible = false;
 
             openFileButton.ForeColor = Color.Lime;
 
             preprocessingEffectsListBox.Items.Add("[OFF]: Grayscale");
             preprocessingEffectsListBox.Items.Add("[OFF]: Deepfry");
+            preprocessingEffectsListBox.Items.Add("[OFF]: Invert");
+            preprocessingEffectsListBox.Items.Add("[OFF]: Brightness:50 <-100/100>");
+            preprocessingEffectsListBox.Items.Add("[OFF]: Contrast:50 <-100/100>");
 
             forVersionLabel.Text = $"for v{FOR_VERSION}";
 
@@ -119,11 +117,12 @@ namespace PANBTG_GUI
                     for (int i = 0; i < preprocessingEffectsListBox.Items.Count; i++)
                     {
                         string val = preprocessingEffectsListBox.Items[i] as string;
-                        string[] valSplitted = val.Split(new string[] { ": " }, StringSplitOptions.None);
+                        string[] valSplitted1 = val.Split(new string[] { ": " }, StringSplitOptions.None);
+                        string effectName = valSplitted1[1].Split(' ')[0].Trim().ToLowerInvariant();
 
-                        if (valSplitted[0].Contains("ON"))
+                        if (valSplitted1[0].Contains("ON"))
                         {
-                            enabledEffects += $"{(enabledEffects.Length != 0 ? "," : "")}{valSplitted[1].Trim().ToLower()}";
+                            enabledEffects += $"{(enabledEffects.Length != 0 ? "," : "")}{effectName}";
                         }
                     }
 
@@ -360,6 +359,7 @@ namespace PANBTG_GUI
 
         private void preprocessingEffectsToggleItemButton_Click(object sender, EventArgs e)
         {
+            Console.WriteLine(preprocessingEffectsListBox.SelectedIndex);
             string oldVal = preprocessingEffectsListBox.Items[preprocessingEffectsListBox.SelectedIndex] as string;
             string[] oldValSplitted = oldVal.Split(new string[] { ": " }, StringSplitOptions.None);
 
@@ -485,5 +485,44 @@ namespace PANBTG_GUI
             statusTextTextBox.ForeColor = Color.Gray;
             blinkStatusTextTimer1.Stop();
         }
+
+        private void preprocessingEffectsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!(preprocessingEffectsListBox.SelectedIndex < 0))
+            {
+                string currentVal = preprocessingEffectsListBox.Items[preprocessingEffectsListBox.SelectedIndex] as string;
+                string[] currentValSplit1 = currentVal.Split(new string[] { ": " }, StringSplitOptions.None);
+                string[] currentValSplit2 = currentValSplit1[1].Split(new string[] { " " }, StringSplitOptions.None);
+                bool canSetValue = currentValSplit2.Length == 2;
+                preprocessingEffectsSetValueItemButton.Visible = canSetValue;
+            }
+            
+        }
+
+        private void preprocessingEffectsSetValueItemButton_Click(object sender, EventArgs e)
+        {
+            string currentVal = preprocessingEffectsListBox.Items[preprocessingEffectsListBox.SelectedIndex] as string;
+            string[] currentValSplit1 = currentVal.Split(new string[] { ": " }, StringSplitOptions.None);
+            string[] currentValSplit2 = currentValSplit1[1].Split(' ');
+            string[] effectNameAndPower = currentValSplit2[0].Split(':');
+            string[] minMax = currentValSplit2[1].Replace("<","").Replace(">", "").Split('/');
+
+            using (NumericPopupForm numericPopup = new NumericPopupForm())
+            {
+                numericPopup.setQuestionText($"Set power of {effectNameAndPower[0]} effect! ({minMax[0]}/{minMax[1]})");
+                numericPopup.setupInput(int.Parse(effectNameAndPower[1]), 0, 1, int.Parse(minMax[0]), int.Parse(minMax[1]));
+
+                if (numericPopup.ShowDialog() == DialogResult.OK)
+                {
+                    int result = int.Parse(numericPopup.getResult().ToString());
+                    preprocessingEffectsListBox.Items[preprocessingEffectsListBox.SelectedIndex] = currentVal.Replace($":{effectNameAndPower[1]}", $":{result}");
+
+                    statusTextTextBox.Text = $"PRE-EFFECTS: Effect {effectNameAndPower[0]}'s power changed to {result}!";
+                }
+            }
+
+            GC.Collect();
+        }
+
     }
 }
