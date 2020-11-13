@@ -9,7 +9,7 @@ namespace PANBTG_GUI
 {
     public partial class MainForm : Form
     {
-        static string FOR_VERSION = "1.2.1";
+        static string FOR_VERSION = "1.2.1"; //
 
         public MainForm()
         {
@@ -29,6 +29,8 @@ namespace PANBTG_GUI
             runResultCommandButton.Enabled = false;
             nearestNeighborCheckBox.Visible = false;
             preprocessingEffectsSetValueItemButton.Visible = false;
+            directionXPanel.Visible = false;
+            directionZPanel.Visible = false;
 
             openFileButton.ForeColor = Color.Lime;
 
@@ -37,6 +39,8 @@ namespace PANBTG_GUI
             preprocessingEffectsListBox.Items.Add("[OFF]: Invert");
             preprocessingEffectsListBox.Items.Add("[OFF]: Brightness:50 <-100/100>");
             preprocessingEffectsListBox.Items.Add("[OFF]: Contrast:50 <-100/100>");
+
+            preprocessingEffectsListBox.SelectedIndex = 0;
 
             forVersionLabel.Text = $"for v{FOR_VERSION}";
 
@@ -98,13 +102,16 @@ namespace PANBTG_GUI
                 if (resizingMethodComboBox.SelectedIndex != 0 && nearestNeighborCheckBox.Checked && ((resizingMethodComboBox.SelectedIndex == 1 && isValidScale) || (resizingMethodComboBox.SelectedIndex == 2 && isValidResize)))
                     resultCmd += $" --nearest-neighbor";
 
-                if (enableDitheringCheckBox.Checked)
+                if (isUsingDitheringCheckBox.Checked)
                     resultCmd += $" --dither {ditheringValueNumericInput.Value}";
 
-                if (enableCustomScaffoldBlockCheckBox.Checked)
+                if (isCustomDirectionEnabledCheckBox.Checked)
+                    resultCmd += $" --direction {directionXTextBox.Text},{directionZTextBox.Text}";
+
+                if (isCustomScaffoldCheckBox.Checked)
                     resultCmd += $" --scaffold-block {customScaffoldBlockTextBox.Text.Replace(" ", ":")}";
 
-                if (isFullScaffoldCheckBox.Checked)
+                if (isFullScaffoldEanbledCheckBox.Checked)
                     resultCmd += $" --full-scaffold";
 
                 if (isVerticalCheckBox.Checked)
@@ -290,7 +297,7 @@ namespace PANBTG_GUI
 
         private void enableDitheringCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (enableDitheringCheckBox.Checked)
+            if (isUsingDitheringCheckBox.Checked)
             {
                 ditheringValueNumericInput.Value = new decimal(5);
                 ditheringValueNumericInput.Enabled = true;
@@ -326,7 +333,7 @@ namespace PANBTG_GUI
 
         private void isFullScaffoldCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (isFullScaffoldCheckBox.Checked)
+            if (isFullScaffoldEanbledCheckBox.Checked)
             {
                 statusTextTextBox.Text = "Scaffold block is enabled for every block!";
             }
@@ -340,7 +347,7 @@ namespace PANBTG_GUI
         private void enableCustomScaffoldBlockCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             customScaffoldBlockTextBox.Text = "stone 0";
-            if (enableCustomScaffoldBlockCheckBox.Checked)
+            if (isCustomScaffoldCheckBox.Checked)
             {
                 customScaffoldBlockInputPanel.Visible = true;
             } else
@@ -359,7 +366,6 @@ namespace PANBTG_GUI
 
         private void preprocessingEffectsToggleItemButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(preprocessingEffectsListBox.SelectedIndex);
             string oldVal = preprocessingEffectsListBox.Items[preprocessingEffectsListBox.SelectedIndex] as string;
             string[] oldValSplitted = oldVal.Split(new string[] { ": " }, StringSplitOptions.None);
 
@@ -437,6 +443,7 @@ namespace PANBTG_GUI
                 statusTextTextBox.Text = $"Process started!";
                 startInfo.Arguments = resultCommandTextBox.Text.Remove(0, 10);
                 startInfo.FileName = resultCommandTextBox.Text.Substring(0, 10);
+                startInfo.UseShellExecute = false;
                 startInfo.WindowStyle = ProcessWindowStyle.Normal;
                 startInfo.Environment.Add("PANBTG_GUI_FOR_VERSION", FOR_VERSION);
                 Process process = Process.Start(startInfo);
@@ -495,6 +502,10 @@ namespace PANBTG_GUI
                 string[] currentValSplit2 = currentValSplit1[1].Split(new string[] { " " }, StringSplitOptions.None);
                 bool canSetValue = currentValSplit2.Length == 2;
                 preprocessingEffectsSetValueItemButton.Visible = canSetValue;
+
+
+
+                preprocessingEffectsToggleItemButton.BackColor = currentValSplit1[0].Contains("ON") ? Color.FromArgb(0, 64, 0) : Color.FromArgb(64, 0, 0);
             }
             
         }
@@ -524,5 +535,65 @@ namespace PANBTG_GUI
             GC.Collect();
         }
 
+        private void directionXTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (String.IsNullOrEmpty(directionXTextBox.Text))
+            {
+                directionXTextBox.Text = "+";
+                return;
+            }
+            char t = directionXTextBox.Text[directionXTextBox.Text.Length - 1].ToString().Trim()[0];
+            if (t == '+' || t == '-')
+            {
+                directionXTextBox.Text = t.ToString();
+            } else
+            {
+                directionXTextBox.Text = directionXTextBox.Text[0].ToString();
+            }
+            directionXTextBox.SelectionStart = directionXTextBox.Text.Length;
+            directionXTextBox.ScrollToCaret();
+            statusTextTextBox.Text = $"X direction changed to {directionXTextBox.Text}!";
+            genCmd();
+        }
+
+        private void directionZTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (String.IsNullOrEmpty(directionZTextBox.Text))
+            {
+                directionZTextBox.Text = "+";
+                return;
+            }
+            char t = directionZTextBox.Text[directionZTextBox.Text.Length - 1].ToString().Trim()[0];
+            if (t == '+' || t == '-')
+            {
+                directionZTextBox.Text = t.ToString();
+            }
+            else
+            {
+                directionZTextBox.Text = directionZTextBox.Text[0].ToString();
+            }
+            directionZTextBox.SelectionStart = directionZTextBox.Text.Length;
+            directionZTextBox.ScrollToCaret();
+            statusTextTextBox.Text = $"Z direction changed to {directionZTextBox.Text}!";
+            genCmd();
+        }
+
+        private void isCustomDirectionEnabledCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isCustomDirectionEnabledCheckBox.Checked)
+            {
+                directionXTextBox.Text = "+";
+                directionZTextBox.Text = "+";
+                directionXPanel.Visible = true;
+                directionZPanel.Visible = true;
+                statusTextTextBox.Text = $"Custom direction is enabled!";
+            } else
+            {
+                directionXPanel.Visible = false;
+                directionZPanel.Visible = false;
+                statusTextTextBox.Text = $"Custom direction is disabled!";
+            }
+            genCmd();
+        }
     }
 }

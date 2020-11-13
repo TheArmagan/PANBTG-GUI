@@ -37,21 +37,28 @@
             this.resultCommandTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
+            this.directionZPanel = new System.Windows.Forms.Panel();
+            this.directionZTextBox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.directionXPanel = new System.Windows.Forms.Panel();
+            this.directionXTextBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.nearestNeighborCheckBox = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.preprocessingEffectsListBoxPanel = new System.Windows.Forms.Panel();
+            this.preprocessingEffectsSetValueItemButton = new System.Windows.Forms.Button();
             this.preprocessingEffectsMoveDownItemButton = new System.Windows.Forms.Button();
             this.preprocessingEffectsMoveUpItemButton = new System.Windows.Forms.Button();
             this.preprocessingEffectsToggleItemButton = new System.Windows.Forms.Button();
             this.preprocessingEffectsListBox = new System.Windows.Forms.ListBox();
             this.customScaffoldBlockInputPanel = new System.Windows.Forms.Panel();
             this.customScaffoldBlockTextBox = new System.Windows.Forms.TextBox();
-            this.enableCustomScaffoldBlockCheckBox = new System.Windows.Forms.CheckBox();
-            this.isFullScaffoldCheckBox = new System.Windows.Forms.CheckBox();
+            this.isCustomScaffoldCheckBox = new System.Windows.Forms.CheckBox();
+            this.isFullScaffoldEanbledCheckBox = new System.Windows.Forms.CheckBox();
             this.isVerticalCheckBox = new System.Windows.Forms.CheckBox();
             this.ditheringValueNumericInput = new System.Windows.Forms.NumericUpDown();
-            this.enableDitheringCheckBox = new System.Windows.Forms.CheckBox();
+            this.isUsingDitheringCheckBox = new System.Windows.Forms.CheckBox();
             this.resizingMethodXLabel = new System.Windows.Forms.Label();
             this.resizingMethod2NumericInput = new System.Windows.Forms.NumericUpDown();
             this.resizingMethod1NumericInput = new System.Windows.Forms.NumericUpDown();
@@ -62,10 +69,12 @@
             this.statusTextTextBox = new System.Windows.Forms.TextBox();
             this.blinkStatusTextTimer1 = new System.Windows.Forms.Timer(this.components);
             this.forVersionLabel = new System.Windows.Forms.Label();
-            this.preprocessingEffectsSetValueItemButton = new System.Windows.Forms.Button();
+            this.isCustomDirectionEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.controlPanel.SuspendLayout();
+            this.directionZPanel.SuspendLayout();
+            this.directionXPanel.SuspendLayout();
             this.preprocessingEffectsListBoxPanel.SuspendLayout();
             this.customScaffoldBlockInputPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ditheringValueNumericInput)).BeginInit();
@@ -156,16 +165,19 @@
             // 
             // controlPanel
             // 
+            this.controlPanel.Controls.Add(this.isCustomDirectionEnabledCheckBox);
+            this.controlPanel.Controls.Add(this.directionZPanel);
+            this.controlPanel.Controls.Add(this.directionXPanel);
             this.controlPanel.Controls.Add(this.nearestNeighborCheckBox);
             this.controlPanel.Controls.Add(this.label5);
             this.controlPanel.Controls.Add(this.label4);
             this.controlPanel.Controls.Add(this.preprocessingEffectsListBoxPanel);
             this.controlPanel.Controls.Add(this.customScaffoldBlockInputPanel);
-            this.controlPanel.Controls.Add(this.enableCustomScaffoldBlockCheckBox);
-            this.controlPanel.Controls.Add(this.isFullScaffoldCheckBox);
+            this.controlPanel.Controls.Add(this.isCustomScaffoldCheckBox);
+            this.controlPanel.Controls.Add(this.isFullScaffoldEanbledCheckBox);
             this.controlPanel.Controls.Add(this.isVerticalCheckBox);
             this.controlPanel.Controls.Add(this.ditheringValueNumericInput);
-            this.controlPanel.Controls.Add(this.enableDitheringCheckBox);
+            this.controlPanel.Controls.Add(this.isUsingDitheringCheckBox);
             this.controlPanel.Controls.Add(this.resizingMethodXLabel);
             this.controlPanel.Controls.Add(this.resizingMethod2NumericInput);
             this.controlPanel.Controls.Add(this.resizingMethod1NumericInput);
@@ -174,6 +186,74 @@
             this.controlPanel.Name = "controlPanel";
             this.controlPanel.Size = new System.Drawing.Size(597, 433);
             this.controlPanel.TabIndex = 9;
+            // 
+            // directionZPanel
+            // 
+            this.directionZPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.directionZPanel.Controls.Add(this.directionZTextBox);
+            this.directionZPanel.Controls.Add(this.label8);
+            this.directionZPanel.Location = new System.Drawing.Point(511, 143);
+            this.directionZPanel.Name = "directionZPanel";
+            this.directionZPanel.Padding = new System.Windows.Forms.Padding(4);
+            this.directionZPanel.Size = new System.Drawing.Size(85, 32);
+            this.directionZPanel.TabIndex = 20;
+            // 
+            // directionZTextBox
+            // 
+            this.directionZTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.directionZTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.directionZTextBox.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.directionZTextBox.ForeColor = System.Drawing.Color.White;
+            this.directionZTextBox.Location = new System.Drawing.Point(32, 7);
+            this.directionZTextBox.Name = "directionZTextBox";
+            this.directionZTextBox.Size = new System.Drawing.Size(46, 18);
+            this.directionZTextBox.TabIndex = 7;
+            this.directionZTextBox.Text = "+";
+            this.directionZTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.directionZTextBox_KeyUp);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Consolas", 11.45F);
+            this.label8.Location = new System.Drawing.Point(4, 7);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(27, 19);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Z:";
+            // 
+            // directionXPanel
+            // 
+            this.directionXPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.directionXPanel.Controls.Add(this.directionXTextBox);
+            this.directionXPanel.Controls.Add(this.label7);
+            this.directionXPanel.Location = new System.Drawing.Point(424, 143);
+            this.directionXPanel.Name = "directionXPanel";
+            this.directionXPanel.Padding = new System.Windows.Forms.Padding(4);
+            this.directionXPanel.Size = new System.Drawing.Size(85, 32);
+            this.directionXPanel.TabIndex = 18;
+            // 
+            // directionXTextBox
+            // 
+            this.directionXTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.directionXTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.directionXTextBox.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.directionXTextBox.ForeColor = System.Drawing.Color.White;
+            this.directionXTextBox.Location = new System.Drawing.Point(32, 7);
+            this.directionXTextBox.Name = "directionXTextBox";
+            this.directionXTextBox.Size = new System.Drawing.Size(46, 18);
+            this.directionXTextBox.TabIndex = 7;
+            this.directionXTextBox.Text = "+";
+            this.directionXTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.directionXTextBox_KeyUp);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Consolas", 11.45F);
+            this.label7.Location = new System.Drawing.Point(4, 7);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(27, 19);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "X:";
             // 
             // nearestNeighborCheckBox
             // 
@@ -201,7 +281,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Consolas", 11.45F);
-            this.label4.Location = new System.Drawing.Point(-5, 153);
+            this.label4.Location = new System.Drawing.Point(-5, 338);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(207, 19);
             this.label4.TabIndex = 14;
@@ -214,10 +294,25 @@
             this.preprocessingEffectsListBoxPanel.Controls.Add(this.preprocessingEffectsMoveUpItemButton);
             this.preprocessingEffectsListBoxPanel.Controls.Add(this.preprocessingEffectsToggleItemButton);
             this.preprocessingEffectsListBoxPanel.Controls.Add(this.preprocessingEffectsListBox);
-            this.preprocessingEffectsListBoxPanel.Location = new System.Drawing.Point(246, 153);
+            this.preprocessingEffectsListBoxPanel.Location = new System.Drawing.Point(246, 338);
             this.preprocessingEffectsListBoxPanel.Name = "preprocessingEffectsListBoxPanel";
             this.preprocessingEffectsListBoxPanel.Size = new System.Drawing.Size(352, 92);
             this.preprocessingEffectsListBoxPanel.TabIndex = 12;
+            // 
+            // preprocessingEffectsSetValueItemButton
+            // 
+            this.preprocessingEffectsSetValueItemButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.preprocessingEffectsSetValueItemButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(99)))), ((int)(((byte)(99)))));
+            this.preprocessingEffectsSetValueItemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.preprocessingEffectsSetValueItemButton.Font = new System.Drawing.Font("Consolas", 11.25F);
+            this.preprocessingEffectsSetValueItemButton.ForeColor = System.Drawing.Color.White;
+            this.preprocessingEffectsSetValueItemButton.Location = new System.Drawing.Point(73, 57);
+            this.preprocessingEffectsSetValueItemButton.Name = "preprocessingEffectsSetValueItemButton";
+            this.preprocessingEffectsSetValueItemButton.Size = new System.Drawing.Size(101, 35);
+            this.preprocessingEffectsSetValueItemButton.TabIndex = 15;
+            this.preprocessingEffectsSetValueItemButton.Text = "Set Value";
+            this.preprocessingEffectsSetValueItemButton.UseVisualStyleBackColor = false;
+            this.preprocessingEffectsSetValueItemButton.Click += new System.EventHandler(this.preprocessingEffectsSetValueItemButton_Click);
             // 
             // preprocessingEffectsMoveDownItemButton
             // 
@@ -278,10 +373,10 @@
             // 
             this.customScaffoldBlockInputPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.customScaffoldBlockInputPanel.Controls.Add(this.customScaffoldBlockTextBox);
-            this.customScaffoldBlockInputPanel.Location = new System.Drawing.Point(246, 91);
+            this.customScaffoldBlockInputPanel.Location = new System.Drawing.Point(424, 91);
             this.customScaffoldBlockInputPanel.Name = "customScaffoldBlockInputPanel";
             this.customScaffoldBlockInputPanel.Padding = new System.Windows.Forms.Padding(4);
-            this.customScaffoldBlockInputPanel.Size = new System.Drawing.Size(351, 32);
+            this.customScaffoldBlockInputPanel.Size = new System.Drawing.Size(173, 32);
             this.customScaffoldBlockInputPanel.TabIndex = 8;
             // 
             // customScaffoldBlockTextBox
@@ -292,39 +387,39 @@
             this.customScaffoldBlockTextBox.ForeColor = System.Drawing.Color.White;
             this.customScaffoldBlockTextBox.Location = new System.Drawing.Point(7, 7);
             this.customScaffoldBlockTextBox.Name = "customScaffoldBlockTextBox";
-            this.customScaffoldBlockTextBox.Size = new System.Drawing.Size(336, 18);
+            this.customScaffoldBlockTextBox.Size = new System.Drawing.Size(163, 18);
             this.customScaffoldBlockTextBox.TabIndex = 7;
             this.customScaffoldBlockTextBox.TextChanged += new System.EventHandler(this.customScaffoldBlockTextBox_TextChanged);
             // 
-            // enableCustomScaffoldBlockCheckBox
+            // isCustomScaffoldCheckBox
             // 
-            this.enableCustomScaffoldBlockCheckBox.AutoSize = true;
-            this.enableCustomScaffoldBlockCheckBox.Font = new System.Drawing.Font("Consolas", 11.45F);
-            this.enableCustomScaffoldBlockCheckBox.Location = new System.Drawing.Point(-1, 95);
-            this.enableCustomScaffoldBlockCheckBox.Name = "enableCustomScaffoldBlockCheckBox";
-            this.enableCustomScaffoldBlockCheckBox.Size = new System.Drawing.Size(217, 23);
-            this.enableCustomScaffoldBlockCheckBox.TabIndex = 9;
-            this.enableCustomScaffoldBlockCheckBox.Text = "Custom Scaffold Block";
-            this.enableCustomScaffoldBlockCheckBox.UseVisualStyleBackColor = true;
-            this.enableCustomScaffoldBlockCheckBox.CheckedChanged += new System.EventHandler(this.enableCustomScaffoldBlockCheckBox_CheckedChanged);
+            this.isCustomScaffoldCheckBox.AutoSize = true;
+            this.isCustomScaffoldCheckBox.Font = new System.Drawing.Font("Consolas", 11.45F);
+            this.isCustomScaffoldCheckBox.Location = new System.Drawing.Point(-1, 91);
+            this.isCustomScaffoldCheckBox.Name = "isCustomScaffoldCheckBox";
+            this.isCustomScaffoldCheckBox.Size = new System.Drawing.Size(217, 23);
+            this.isCustomScaffoldCheckBox.TabIndex = 9;
+            this.isCustomScaffoldCheckBox.Text = "Custom Scaffold Block";
+            this.isCustomScaffoldCheckBox.UseVisualStyleBackColor = true;
+            this.isCustomScaffoldCheckBox.CheckedChanged += new System.EventHandler(this.enableCustomScaffoldBlockCheckBox_CheckedChanged);
             // 
-            // isFullScaffoldCheckBox
+            // isFullScaffoldEanbledCheckBox
             // 
-            this.isFullScaffoldCheckBox.AutoSize = true;
-            this.isFullScaffoldCheckBox.Font = new System.Drawing.Font("Consolas", 11.45F);
-            this.isFullScaffoldCheckBox.Location = new System.Drawing.Point(-1, 124);
-            this.isFullScaffoldCheckBox.Name = "isFullScaffoldCheckBox";
-            this.isFullScaffoldCheckBox.Size = new System.Drawing.Size(145, 23);
-            this.isFullScaffoldCheckBox.TabIndex = 8;
-            this.isFullScaffoldCheckBox.Text = "Full Scaffold";
-            this.isFullScaffoldCheckBox.UseVisualStyleBackColor = true;
-            this.isFullScaffoldCheckBox.CheckedChanged += new System.EventHandler(this.isFullScaffoldCheckBox_CheckedChanged);
+            this.isFullScaffoldEanbledCheckBox.AutoSize = true;
+            this.isFullScaffoldEanbledCheckBox.Font = new System.Drawing.Font("Consolas", 11.45F);
+            this.isFullScaffoldEanbledCheckBox.Location = new System.Drawing.Point(-1, 120);
+            this.isFullScaffoldEanbledCheckBox.Name = "isFullScaffoldEanbledCheckBox";
+            this.isFullScaffoldEanbledCheckBox.Size = new System.Drawing.Size(145, 23);
+            this.isFullScaffoldEanbledCheckBox.TabIndex = 8;
+            this.isFullScaffoldEanbledCheckBox.Text = "Full Scaffold";
+            this.isFullScaffoldEanbledCheckBox.UseVisualStyleBackColor = true;
+            this.isFullScaffoldEanbledCheckBox.CheckedChanged += new System.EventHandler(this.isFullScaffoldCheckBox_CheckedChanged);
             // 
             // isVerticalCheckBox
             // 
             this.isVerticalCheckBox.AutoSize = true;
             this.isVerticalCheckBox.Font = new System.Drawing.Font("Consolas", 11.45F);
-            this.isVerticalCheckBox.Location = new System.Drawing.Point(-1, 64);
+            this.isVerticalCheckBox.Location = new System.Drawing.Point(-1, 62);
             this.isVerticalCheckBox.Name = "isVerticalCheckBox";
             this.isVerticalCheckBox.Size = new System.Drawing.Size(154, 23);
             this.isVerticalCheckBox.TabIndex = 7;
@@ -343,17 +438,17 @@
             this.ditheringValueNumericInput.TabIndex = 6;
             this.ditheringValueNumericInput.ValueChanged += new System.EventHandler(this.ditheringValueNumericInput_ValueChanged);
             // 
-            // enableDitheringCheckBox
+            // isUsingDitheringCheckBox
             // 
-            this.enableDitheringCheckBox.AutoSize = true;
-            this.enableDitheringCheckBox.Font = new System.Drawing.Font("Consolas", 11.45F);
-            this.enableDitheringCheckBox.Location = new System.Drawing.Point(-1, 35);
-            this.enableDitheringCheckBox.Name = "enableDitheringCheckBox";
-            this.enableDitheringCheckBox.Size = new System.Drawing.Size(172, 23);
-            this.enableDitheringCheckBox.TabIndex = 5;
-            this.enableDitheringCheckBox.Text = "Enable Dithering";
-            this.enableDitheringCheckBox.UseVisualStyleBackColor = true;
-            this.enableDitheringCheckBox.CheckedChanged += new System.EventHandler(this.enableDitheringCheckBox_CheckedChanged);
+            this.isUsingDitheringCheckBox.AutoSize = true;
+            this.isUsingDitheringCheckBox.Font = new System.Drawing.Font("Consolas", 11.45F);
+            this.isUsingDitheringCheckBox.Location = new System.Drawing.Point(-1, 35);
+            this.isUsingDitheringCheckBox.Name = "isUsingDitheringCheckBox";
+            this.isUsingDitheringCheckBox.Size = new System.Drawing.Size(172, 23);
+            this.isUsingDitheringCheckBox.TabIndex = 5;
+            this.isUsingDitheringCheckBox.Text = "Enable Dithering";
+            this.isUsingDitheringCheckBox.UseVisualStyleBackColor = true;
+            this.isUsingDitheringCheckBox.CheckedChanged += new System.EventHandler(this.enableDitheringCheckBox_CheckedChanged);
             // 
             // resizingMethodXLabel
             // 
@@ -467,20 +562,17 @@
             this.forVersionLabel.TabIndex = 13;
             this.forVersionLabel.Text = "for v0.0.0";
             // 
-            // preprocessingEffectsSetValueItemButton
+            // isCustomDirectionEnabledCheckBox
             // 
-            this.preprocessingEffectsSetValueItemButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.preprocessingEffectsSetValueItemButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(99)))), ((int)(((byte)(99)))));
-            this.preprocessingEffectsSetValueItemButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.preprocessingEffectsSetValueItemButton.Font = new System.Drawing.Font("Consolas", 11.25F);
-            this.preprocessingEffectsSetValueItemButton.ForeColor = System.Drawing.Color.White;
-            this.preprocessingEffectsSetValueItemButton.Location = new System.Drawing.Point(73, 57);
-            this.preprocessingEffectsSetValueItemButton.Name = "preprocessingEffectsSetValueItemButton";
-            this.preprocessingEffectsSetValueItemButton.Size = new System.Drawing.Size(101, 35);
-            this.preprocessingEffectsSetValueItemButton.TabIndex = 15;
-            this.preprocessingEffectsSetValueItemButton.Text = "Set Value";
-            this.preprocessingEffectsSetValueItemButton.UseVisualStyleBackColor = false;
-            this.preprocessingEffectsSetValueItemButton.Click += new System.EventHandler(this.preprocessingEffectsSetValueItemButton_Click);
+            this.isCustomDirectionEnabledCheckBox.AutoSize = true;
+            this.isCustomDirectionEnabledCheckBox.Font = new System.Drawing.Font("Consolas", 11.45F);
+            this.isCustomDirectionEnabledCheckBox.Location = new System.Drawing.Point(-1, 149);
+            this.isCustomDirectionEnabledCheckBox.Name = "isCustomDirectionEnabledCheckBox";
+            this.isCustomDirectionEnabledCheckBox.Size = new System.Drawing.Size(172, 23);
+            this.isCustomDirectionEnabledCheckBox.TabIndex = 21;
+            this.isCustomDirectionEnabledCheckBox.Text = "Custom Direction";
+            this.isCustomDirectionEnabledCheckBox.UseVisualStyleBackColor = true;
+            this.isCustomDirectionEnabledCheckBox.CheckedChanged += new System.EventHandler(this.isCustomDirectionEnabledCheckBox_CheckedChanged);
             // 
             // MainForm
             // 
@@ -501,6 +593,7 @@
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PANBTG-GUI";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -508,6 +601,10 @@
             this.panel2.PerformLayout();
             this.controlPanel.ResumeLayout(false);
             this.controlPanel.PerformLayout();
+            this.directionZPanel.ResumeLayout(false);
+            this.directionZPanel.PerformLayout();
+            this.directionXPanel.ResumeLayout(false);
+            this.directionXPanel.PerformLayout();
             this.preprocessingEffectsListBoxPanel.ResumeLayout(false);
             this.customScaffoldBlockInputPanel.ResumeLayout(false);
             this.customScaffoldBlockInputPanel.PerformLayout();
@@ -533,13 +630,13 @@
         private System.Windows.Forms.NumericUpDown resizingMethod1NumericInput;
         private System.Windows.Forms.NumericUpDown resizingMethod2NumericInput;
         private System.Windows.Forms.Label resizingMethodXLabel;
-        private System.Windows.Forms.CheckBox enableDitheringCheckBox;
+        private System.Windows.Forms.CheckBox isUsingDitheringCheckBox;
         private System.Windows.Forms.NumericUpDown ditheringValueNumericInput;
         private System.Windows.Forms.CheckBox isVerticalCheckBox;
-        private System.Windows.Forms.CheckBox isFullScaffoldCheckBox;
+        private System.Windows.Forms.CheckBox isFullScaffoldEanbledCheckBox;
         private System.Windows.Forms.Panel customScaffoldBlockInputPanel;
         private System.Windows.Forms.TextBox customScaffoldBlockTextBox;
-        private System.Windows.Forms.CheckBox enableCustomScaffoldBlockCheckBox;
+        private System.Windows.Forms.CheckBox isCustomScaffoldCheckBox;
         private System.Windows.Forms.Button runResultCommandButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox preprocessingEffectsListBox;
@@ -555,6 +652,13 @@
         private System.Windows.Forms.Timer blinkStatusTextTimer1;
         private System.Windows.Forms.Label forVersionLabel;
         private System.Windows.Forms.Button preprocessingEffectsSetValueItemButton;
+        private System.Windows.Forms.Panel directionXPanel;
+        private System.Windows.Forms.TextBox directionXTextBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel directionZPanel;
+        private System.Windows.Forms.TextBox directionZTextBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox isCustomDirectionEnabledCheckBox;
     }
 }
 
