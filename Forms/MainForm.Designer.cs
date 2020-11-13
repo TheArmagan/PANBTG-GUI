@@ -70,6 +70,8 @@
             this.blinkStatusTextTimer1 = new System.Windows.Forms.Timer(this.components);
             this.forVersionLabel = new System.Windows.Forms.Label();
             this.isCustomDirectionEnabledCheckBox = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.isOnlyPreprocess = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.controlPanel.SuspendLayout();
@@ -165,6 +167,8 @@
             // 
             // controlPanel
             // 
+            this.controlPanel.Controls.Add(this.isOnlyPreprocess);
+            this.controlPanel.Controls.Add(this.label6);
             this.controlPanel.Controls.Add(this.isCustomDirectionEnabledCheckBox);
             this.controlPanel.Controls.Add(this.directionZPanel);
             this.controlPanel.Controls.Add(this.directionXPanel);
@@ -574,6 +578,30 @@
             this.isCustomDirectionEnabledCheckBox.UseVisualStyleBackColor = true;
             this.isCustomDirectionEnabledCheckBox.CheckedChanged += new System.EventHandler(this.isCustomDirectionEnabledCheckBox_CheckedChanged);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label6.ForeColor = System.Drawing.Color.Gray;
+            this.label6.Location = new System.Drawing.Point(-3, 357);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(161, 14);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "the order is important";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // isOnlyPreprocess
+            // 
+            this.isOnlyPreprocess.AutoSize = true;
+            this.isOnlyPreprocess.Font = new System.Drawing.Font("Consolas", 11.45F);
+            this.isOnlyPreprocess.Location = new System.Drawing.Point(-1, 178);
+            this.isOnlyPreprocess.Name = "isOnlyPreprocess";
+            this.isOnlyPreprocess.Size = new System.Drawing.Size(244, 23);
+            this.isOnlyPreprocess.TabIndex = 22;
+            this.isOnlyPreprocess.Text = "No NBT - Only Preprocess";
+            this.isOnlyPreprocess.UseVisualStyleBackColor = true;
+            this.isOnlyPreprocess.CheckedChanged += new System.EventHandler(this.isOnlyPreprocess_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -659,6 +687,8 @@
         private System.Windows.Forms.TextBox directionZTextBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox isCustomDirectionEnabledCheckBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox isOnlyPreprocess;
     }
 }
 

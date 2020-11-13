@@ -125,11 +125,18 @@ namespace PANBTG_GUI
                     {
                         string val = preprocessingEffectsListBox.Items[i] as string;
                         string[] valSplitted1 = val.Split(new string[] { ": " }, StringSplitOptions.None);
-                        string effectName = valSplitted1[1].Split(' ')[0].Trim().ToLowerInvariant();
+                        string[] _effectNameAndPower = valSplitted1[1].Split(' ')[0].Trim().Split(':');
+                        string[] effectNameAndPower = new string[2];
 
-                        if (valSplitted1[0].Contains("ON"))
+                        for (int j = 0; j < _effectNameAndPower.Length; j++)
                         {
-                            enabledEffects += $"{(enabledEffects.Length != 0 ? "," : "")}{effectName}";
+                            effectNameAndPower[j] = _effectNameAndPower[j];
+                        }
+                        
+
+                        if (valSplitted1[0].Contains("ON") && effectNameAndPower[1] != "0")
+                        {
+                            enabledEffects += $"{(enabledEffects.Length != 0 ? "," : "")}{effectNameAndPower[0].ToLowerInvariant()}{(!String.IsNullOrWhiteSpace(effectNameAndPower[1]) ? ":" + effectNameAndPower[1] : "")}";
                         }
                     }
 
@@ -139,6 +146,9 @@ namespace PANBTG_GUI
                     }
 
                 }
+
+                if (isOnlyPreprocess.Checked)
+                    resultCmd += " --only-preprocess";
 
                 resultCommandTextBox.Text = resultCmd;
             } else
@@ -486,6 +496,15 @@ namespace PANBTG_GUI
             blinkStatusTextTimer1.Start();
         }
 
+        private void blinkTheStatusText(Color bgColor, Color fgColor, int ms = 50)
+        {
+            statusTextTextBox.BackColor = bgColor;
+            statusTextTextBox.ForeColor = fgColor;
+
+            blinkStatusTextTimer1.Interval = ms;
+            blinkStatusTextTimer1.Start();
+        }
+
         private void blinkStatusTextTimer1_Tick(object sender, EventArgs e)
         {
             statusTextTextBox.BackColor = Color.FromArgb(255, 64, 64, 64);
@@ -528,10 +547,11 @@ namespace PANBTG_GUI
                     int result = int.Parse(numericPopup.getResult().ToString());
                     preprocessingEffectsListBox.Items[preprocessingEffectsListBox.SelectedIndex] = currentVal.Replace($":{effectNameAndPower[1]}", $":{result}");
 
-                    statusTextTextBox.Text = $"PRE-EFFECTS: Effect {effectNameAndPower[0]}'s power changed to {result}!";
+                    statusTextTextBox.Text = $"PRE-EFFECTS: Effect {effectNameAndPower[0]}'s power changed to {result}!{(result == 0 ? " (Useless)" : "")}";
+                    if (result == 0) blinkTheStatusText(Color.OrangeRed);
                 }
             }
-
+            genCmd();
             GC.Collect();
         }
 
@@ -592,6 +612,21 @@ namespace PANBTG_GUI
                 directionXPanel.Visible = false;
                 directionZPanel.Visible = false;
                 statusTextTextBox.Text = $"Custom direction is disabled!";
+            }
+            genCmd();
+        }
+
+        private void isOnlyPreprocess_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isOnlyPreprocess.Checked)
+            {
+                statusTextTextBox.Text = $"Only preprocess mode enabled! (Not gonna generate the nbt!)";
+                blinkTheStatusText(Color.OrangeRed);
+            }
+            else
+            {
+                statusTextTextBox.Text = $"Only preprocess mode disabled!";
+                blinkTheStatusText(Color.FromArgb(0, 128, 0), Color.Gray);
             }
             genCmd();
         }
