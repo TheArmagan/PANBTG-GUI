@@ -458,8 +458,17 @@ namespace PANBTG_GUI
                 startInfo.Environment.Add("PANBTG_GUI_FOR_VERSION", FOR_VERSION);
                 Process process = Process.Start(startInfo);
                 process.WaitForExit();
-                statusTextTextBox.Text = "Conversion is finished!";
-                blinkTheStatusText(Color.Lime, 2500);
+                if (process.ExitCode == 0)
+                {
+                    statusTextTextBox.Text = "Conversion successfully is finished!";
+                    blinkTheStatusText(Color.Lime, 2500);
+                } else
+                {
+                    statusTextTextBox.Text = "Something went wrong while trying the run command. Please try to run command manually and see the error. And then do what you need to do!";
+                    blinkTheStatusText(Color.OrangeRed, 2500);
+                }
+                
+                
             } catch (Exception err)
             {
                 if (err.Message.Contains("cannot find"))
